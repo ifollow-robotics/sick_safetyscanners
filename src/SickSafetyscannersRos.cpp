@@ -46,6 +46,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   , m_range_max(0.0)
   , m_angle_offset(-90.0)
   , m_use_pers_conf(false)
+  , m_allow_measurements_beyond_range_max(false)
 {
   dynamic_reconfigure::Server<
     sick_safetyscanners::SickSafetyscannersConfigurationConfig>::CallbackType reconf_callback =
@@ -239,6 +240,8 @@ bool SickSafetyscannersRos::readParameters()
 
   m_private_nh.getParam("use_persistent_config", m_use_pers_conf);
 
+  m_private_nh.getParam("allow_measurements_beyond_range_max", m_allow_measurements_beyond_range_max);
+
   return true;
 }
 
@@ -365,7 +368,7 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
                      data.getDerivedValuesPtr()->getMultiplicationFactor() * 1e-3; // mm -> m
     // Set values close to/greater than max range to infinity according to REP 117
     // https://www.ros.org/reps/rep-0117.html
-    if (scan.ranges[i] >= (0.999 * m_range_max))
+    if (!m_allow_measurements_beyond_range_max && scan.ranges[i] > m_range_max)
     {
       scan.ranges[i] = std::numeric_limits<double>::infinity();
     }

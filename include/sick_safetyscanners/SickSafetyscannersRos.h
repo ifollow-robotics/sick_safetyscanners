@@ -157,9 +157,9 @@ private:
   double m_timestamp_min_acceptable = -1.0;
   double m_timestamp_max_acceptable = 1.0;
 
-  bool m_use_sick_angles;
   float m_angle_offset;
   bool m_use_pers_conf;
+  bool m_allow_measurements_beyond_range_max;
 
   /*!
    * @brief Reads and verifies the ROS parameters.
