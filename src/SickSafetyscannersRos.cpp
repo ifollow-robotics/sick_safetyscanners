@@ -98,7 +98,7 @@ void SickSafetyscannersRos::readTypeCodeSettings()
   sick::datastructure::TypeCode type_code;
   m_device->requestTypeCode(m_communication_settings, type_code);
   m_communication_settings.setEInterfaceType(type_code.getInterfaceType());
-  m_range_min = 0.1;
+  m_range_min = 0.0;
   m_range_max = type_code.getMaxRange();
 }
 
