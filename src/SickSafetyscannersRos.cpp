@@ -368,7 +368,7 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
                      data.getDerivedValuesPtr()->getMultiplicationFactor() * 1e-3; // mm -> m
     // Set values close to/greater than max range to infinity according to REP 117
     // https://www.ros.org/reps/rep-0117.html
-    if (!m_allow_measurements_beyond_range_max && scan.ranges[i] > m_range_max)
+    if (!m_allow_measurements_beyond_range_max && scan.ranges[i] >= m_range_max)
     {
       scan.ranges[i] = std::numeric_limits<double>::infinity();
     }
