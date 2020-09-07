@@ -115,6 +115,7 @@ add_library(${PROJECT_NAME}_core
   src/cola2/FieldHeaderVariableCommand.cpp
   src/cola2/FieldSetsVariableCommand.cpp
   src/cola2/FindMeCommand.cpp
+  src/cola2/DeviceTemperatureVariableCommand.cpp
   src/cola2/FirmwareVersionVariableCommand.cpp
   src/cola2/MeasurementCurrentConfigVariableCommand.cpp
   src/cola2/MeasurementPersistentConfigVariableCommand.cpp
@@ -143,6 +144,7 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ParseFieldGeometryData.cpp
   src/data_processing/ParseFieldHeaderData.cpp
   src/data_processing/ParseFieldSetsData.cpp
+  src/data_processing/ParseDeviceTemperature.cpp
   src/data_processing/ParseFirmwareVersion.cpp
   src/data_processing/ParseGeneralSystemState.cpp
   src/data_processing/ParseIntrusionData.cpp
@@ -175,6 +177,7 @@ add_library(${PROJECT_NAME}_core
   src/datastructure/DeviceStatus.cpp
   src/datastructure/FieldData.cpp
   src/datastructure/FieldSets.cpp
+  src/datastructure/DeviceTemperature.cpp
   src/datastructure/FirmwareVersion.cpp
   src/datastructure/GeneralSystemState.cpp
   src/datastructure/IntrusionData.cpp

@@ -62,6 +62,7 @@
 #include <sick_safetyscanners/cola2/FieldGeometryVariableCommand.h>
 #include <sick_safetyscanners/cola2/FieldHeaderVariableCommand.h>
 #include <sick_safetyscanners/cola2/FindMeCommand.h>
+#include <sick_safetyscanners/cola2/DeviceTemperatureVariableCommand.h>
 #include <sick_safetyscanners/cola2/FirmwareVersionVariableCommand.h>
 #include <sick_safetyscanners/cola2/MeasurementCurrentConfigVariableCommand.h>
 #include <sick_safetyscanners/cola2/MeasurementPersistentConfigVariableCommand.h>
@@ -127,6 +128,8 @@ public:
                               sick::datastructure::ApplicationName& application_name);
   void requestSerialNumber(const sick::datastructure::CommSettings& settings,
                            sick::datastructure::SerialNumber& serial_number);
+  void requestDeviceTemperature(const sick::datastructure::CommSettings& settings,
+                              sick::datastructure::DeviceTemperature& device_temperature);
   void requestFirmwareVersion(const sick::datastructure::CommSettings& settings,
                               sick::datastructure::FirmwareVersion& firmware_version);
   void requestOrderNumber(const datastructure::CommSettings& settings,
@@ -208,6 +211,7 @@ private:
   void requestOrderNumberInColaSession(sick::datastructure::OrderNumber& order_number);
   void requestProjectNameInColaSession(sick::datastructure::ProjectName& project_name);
   void requestUserNameInColaSession(sick::datastructure::UserName& user_name);
+  void requestDeviceTemperatureInColaSession(sick::datastructure::DeviceTemperature& device_temperature);
   void requestFirmwareVersionInColaSession(sick::datastructure::FirmwareVersion& firmware_version);
   void requestPersistentConfigInColaSession(sick::datastructure::ConfigData& config_data);
   void requestConfigMetadataInColaSession(sick::datastructure::ConfigMetadata& config_metadata);

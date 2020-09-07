@@ -67,6 +67,8 @@ SickSafetyscannersRos::SickSafetyscannersRos()
     m_nh.advertise<sick_safetyscanners::OutputPathsMsg>("output_paths", 100);
   m_field_service_server =
     m_nh.advertiseService("field_data", &SickSafetyscannersRos::getFieldData, this);
+  m_temperature_service_server =
+     m_nh.advertiseService("temperature_data", &SickSafetyscannersRos::getTemperatureData, this);
 
   // Diagnostics for frequency
   m_diagnostic_updater.setHardwareID(m_communication_settings.getSensorIp().to_string());
@@ -699,6 +701,12 @@ SickSafetyscannersRos::createApplicationOutputsMessage(const sick::datastructure
 
 
   return msg;
+}
+
+bool SickSafetyscannersRos::getTemperatureData(std_srvs::Empty::Request& req, std_srvs::Empty::Response& res)
+{
+  sick::datastructure::DeviceTemperature temperature;
+  m_device->requestDeviceTemperature(m_communication_settings, temperature);
 }
 
 bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request& req,

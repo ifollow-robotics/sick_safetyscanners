@@ -173,6 +173,14 @@ void SickSafetyscanners::requestUserName(const datastructure::CommSettings& sett
   requestUserNameInColaSession(user_name);
   stopTCPConnection();
 }
+
+void SickSafetyscanners::requestDeviceTemperature(const datastructure::CommSettings& settings,
+                                                datastructure::DeviceTemperature& device_temperature)
+{
+  startTCPConnection(settings);
+  requestDeviceTemperatureInColaSession(device_temperature);
+  stopTCPConnection();
+}
 void SickSafetyscanners::requestFirmwareVersion(const datastructure::CommSettings& settings,
                                                 datastructure::FirmwareVersion& firmware_version)
 {
@@ -348,6 +356,16 @@ void SickSafetyscanners::requestSerialNumberInColaSession(
                                                                serial_number);
   m_session_ptr->executeCommand(command_ptr);
   ROS_INFO("Serial Number: %s", serial_number.getSerialNumber().c_str());
+}
+
+void SickSafetyscanners::requestDeviceTemperatureInColaSession(
+  datastructure::DeviceTemperature& device_temperature)
+{
+  sick::cola2::Cola2Session::CommandPtr command_ptr =
+    std::make_shared<sick::cola2::DeviceTemperatureVariableCommand>(boost::ref(*m_session_ptr),
+                                                                  device_temperature);
+  m_session_ptr->executeCommand(command_ptr);
+  ROS_INFO("Temperature: %d°C", device_temperature.getDeviceTemperature() / 10.0);
 }
 
 void SickSafetyscanners::requestFirmwareVersionInColaSession(

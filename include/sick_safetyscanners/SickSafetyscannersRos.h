@@ -42,6 +42,7 @@
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
 #include <sensor_msgs/LaserScan.h>
+#include <std_srvs/Empty.h>
 
 // STD
 #include <string>
@@ -138,6 +139,7 @@ private:
   std::shared_ptr<DiagnosedLaserScanPublisher> m_diagnosed_laser_scan_publisher;
 
   ros::ServiceServer m_field_service_server;
+  ros::ServiceServer m_temperature_service_server;
 
   bool m_initialised;
 
@@ -213,7 +215,7 @@ private:
   createApplicationOutputsMessage(const sick::datastructure::Data& data);
   void readTypeCodeSettings();
   void readPersistentConfig();
-
+  bool getTemperatureData(std_srvs::Empty::Request& req, std_srvs::Empty::Response& res);
   bool getFieldData(sick_safetyscanners::FieldData::Request& req,
                     sick_safetyscanners::FieldData::Response& res);
 };
